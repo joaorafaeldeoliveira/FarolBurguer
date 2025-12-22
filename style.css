@@ -1,0 +1,940 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+* {
+    font-family: 'Bebas Neue';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: white;
+    background:linear-gradient(rgba(0,0,0,0.96), rgba(0,0,0,0.95))  
+}
+
+.pneu { 
+    position: relative;
+    overflow: hidden;
+}
+.pneu::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url(images/pneu.png) no-repeat right center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+    mix-blend-mode: overlay;
+}
+.pneu > * {
+    position: relative;
+    z-index: 1;
+}
+
+.pneu-mais-pedidos { 
+    position: relative;
+    overflow: hidden;
+}
+.pneu-mais-pedidos::after {
+    content: "";
+    position: absolute;
+    top: -550px;
+    right: 420px;
+    width: 100%;
+    height: 100%;
+    background: url(images/pneu.png) no-repeat right center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+    mix-blend-mode: overlay;
+}
+
+.pneu-mais-pedidos > * {
+    position: relative;
+    z-index: 1;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 5%;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+}
+
+.links:hover {
+    color: #FF7A00;
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.nav-button {
+    padding: 8px 16px;
+    background-color: #FF7A00;
+    border-radius: 10px;
+}
+
+.nav-button:hover {
+    background-color: orange;
+}
+
+.home-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 130px 5%;
+    gap: 40px;
+    flex-wrap: wrap;
+    
+}
+
+.banner-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.banner-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.banner-title h1 {
+    font-size: clamp(48px, 8vw, 72px);
+    font-weight: 300;
+}
+
+.banner-title h2 {
+    font-size: clamp(28px, 6vw, 46px);
+    color: #FF7A00;
+    font-weight: 100;
+}
+
+.farol-effect {
+    position: relative;
+    display: inline-block;
+}
+
+.farol-effect::before {
+    content: "";
+    position: absolute;
+    left: -160px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(150px, 35vw, 300px);
+    height: clamp(150px, 35vw, 300px);
+    background: radial-gradient(
+        ellipse at left,
+        rgba(255, 200, 120, 0.65) 0%,
+        rgba(255, 150, 40, 0.45) 30%,
+        rgba(0, 0, 0, 0) 75%
+    );
+    filter: blur(25px);
+    animation: farolPulse 2.2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes farolPulse {
+    0% { opacity: 0.65; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.05); }
+    100% { opacity: 0.65; transform: translateY(-50%) scale(1); }
+}
+
+.banner-description {
+    font-family: 'Oswald';
+    opacity: 0.5;
+    margin-top: 30px;
+    font-size: clamp(16px, 2vw, 20px);
+    max-width: 500px;
+}
+
+.banner-text-footer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 40px;
+    align-items: center;
+}
+
+.banner-time {
+    color: #FF7A00;
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.banner-button {
+    background-color: #FF7A00;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: clamp(18px, 2.5vw, 24px);
+    text-decoration: none;
+}
+ .banner-button:hover { 
+    background-color: orange;
+ }
+
+.banner-image {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.banner-image-area {
+    width: min(100%, 500px);
+    height: 430px;
+    background-image: url(images/Foto02.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 40px;
+}
+
+.mais-pedidos h1 { 
+    margin-top: 200px;
+    color: #FF7A00;
+    text-align: center;
+    font-weight: 300;
+    font-size: 72px;
+}
+
+.itens-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 30px;
+    margin: 130px 10%;
+}
+
+.item-1, .item-2 {
+    background: #1E1E1E;
+    height: 255px;
+    border-radius: 20px;
+    
+}
+.item-1 { 
+    display: flex;
+    gap: 10px;
+}
+.item-2 { 
+    display: flex;
+    gap: 10px;
+}
+.item-image { 
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-area { 
+    background-image: url(images/ducati.jpeg);
+    width: 120px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100px;
+}
+.item-tags {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.item-tags p { 
+    background-color: #FFC247;
+    padding: 3px 6px;
+    border-radius: 20px;
+}
+
+.item-text { 
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    gap: 20px;
+}
+.item-text p { 
+    max-width: 200px;
+    font-weight: 100;
+}
+.item-text h1 { 
+    margin-top: 20px;
+    display: flex;
+    font-size: 28px;
+    justify-content: flex-start;
+}
+
+.item-footer { 
+    display: flex;
+    align-items: center;
+    gap:50px;
+}
+.item-footer p { 
+    color: #FF7A00;
+    font-size: 24px;
+}
+.item-footer a { 
+    color: white;
+    text-decoration: none;
+}
+.item-button { 
+    background-color: #FF7A00;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 24px;
+}
+.item-button:hover { 
+    background-color: orange;
+}
+.batata {
+  display: flex;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  grid-column: span 2;
+  height: 330px;
+  gap: 30px;
+}
+
+.batata-text {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #1E1E1E;
+}
+
+.batata-text h1 {
+  display: flex;
+  justify-content: flex-start;
+  color: #1E1E1E;
+  font-size: 26px;
+  margin: 0;
+}
+
+.batata-text h2 {
+  font-size: 58px;
+  line-height: 1;
+  color: #FF7A00;
+  text-transform: uppercase;
+  margin: 5px 0 20px 0;
+}
+
+.batata-text p {
+  font-size: 20px;
+  line-height: 24px;
+  max-width: 480px;
+  opacity: 90%;
+}
+
+.batata-button {
+  width: 145px;
+  margin-top: 25px;
+  background: #FF7A00;
+  color: white;
+  padding: 12px 24px;
+  font-size: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.batata-button:hover {
+  background: orange;
+}
+
+.batata-image-desktop {
+  flex: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.batata-image-mobile {
+  display: none;
+}
+
+.batata-image-area {
+  width: 100%;
+  height: 100%;
+  background-image: url(images/Batata02.jpg);
+  background-size: cover;
+  background-position: 40% center;
+  border-radius: 15px;
+}
+
+.sobre-nos-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 130px 5%;
+    gap: 40px;
+    flex-wrap: wrap;
+    
+}
+
+.sobre-nos-banner-image {
+    flex: 1;
+    min-width: 433px;
+    display: flex;
+    justify-content: center;
+}
+
+.sobre-nos-banner-image-area {
+    width: min(100%, 500px);
+    height: 433px;
+    background-image: url(images/Foto03.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    border-radius: 20px;
+}
+
+.sobre-nos-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.sobre-nos-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+.sobre-nos-title h1 {
+    font-size: clamp(28px, 8vw, 30px);
+    color: #FF7A00;
+    font-weight: 300;
+}
+
+.sobre-nos-title h2 {
+    font-size: clamp(28px, 6vw, 66px);
+    font-weight: 100;
+}
+.sobre-nos-title h3 {
+    font-size: clamp(28px, 6vw, 66px);
+    font-weight: 100;
+}
+.sobre-nos-title h5 { 
+    opacity: 0.5;
+    font-size: clamp(20px, 6vw, 16px);
+    margin-top: 30px;
+    font-weight: 100;
+}
+
+.sobre-nos-banner-description {
+    font-family: 'Oswald';
+    opacity: 0.5;
+    margin-top: 30px;
+    font-size: clamp(18px, 2vw, 18px);
+    max-width: 500px;
+}
+.moto { 
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.moto::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 500px;
+    width: 100%;
+    height: 100%;
+    background: url(images/Moto.png) no-repeat right center;
+    background-size: cover;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: overlay;
+    opacity: 0.75;
+}
+.moto > * {
+    position: relative;
+    z-index: 1;
+}
+.moto h1 { 
+    font-size: 70px;
+    max-width: 1015px;
+}
+
+.cardapio-title { 
+    color: #FF7A00;
+    text-align: center;
+    margin: 120px 0px;
+    font-size: 46px;
+    
+}
+
+.cardapio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 0px;
+    padding: 150px;
+}
+
+.cardapio-item { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0; 
+    gap: 15px;
+}
+.cardapio-item p,
+.cardapio-item h1{ 
+    text-align: center;
+}
+.price, .cardapio-item h1 { 
+    font-weight: 100;
+    color: #FF7A00;
+    font-size: 24px;
+}
+.description { 
+    max-width: 180px;
+    font-family: 'Oswald';
+    opacity: 0.5;
+}
+
+.cardapio-image-area { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardapio-item-image { 
+    background-image: url(images/ducati.jpeg);
+    width: 120px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    border-radius: 20px;
+}
+
+footer { 
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    padding: 40px 20px;
+    width: 100%;
+}
+footer a { 
+    text-decoration: none;
+    color: white;
+}
+footer h1 { 
+    font-size: 16px; 
+    font-weight: 100;
+}
+
+
+@media (max-width: 1200px) {
+    .cardapio {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 100px 50px;
+    }
+    
+    .moto h1 {
+      font-size: 56px;
+      padding: 0 40px;
+    }
+  }
+  
+@media (max-width: 992px) {
+    .home-banner, .sobre-nos-banner {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .banner-text, .sobre-nos-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .banner-description, .sobre-nos-text .banner-description {
+      text-align: center;
+    }
+    
+    .banner-text-footer {
+      justify-content: center;
+    }
+    
+    .itens-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    
+    .item-1, .item-2, .batata {
+      grid-column: span 1;
+    }
+    
+    .moto h1 {
+      font-size: 48px;
+    }
+    
+    .nav-links {
+      gap: 20px;
+    }
+    
+    .nav-links a {
+      font-size: 18px;
+    }
+  }
+  
+@media (max-width: 768px) {
+    section {
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      overflow-x: hidden;
+    }
+    nav {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .home-banner {
+      margin: 80px 5%;
+    }
+    
+    .banner-title h1 {
+      font-size: 42px;
+    }
+    
+    .banner-title h2 {
+      font-size: 32px;
+    }
+    
+    .farol-effect::before {
+      left: -100px;
+      width: 200px;
+      height: 200px;
+    }
+    .pneu::after {
+      background-position: center;
+      opacity: 0.5;
+    }
+    .pneu-mais-pedidos::after {
+      background-position: center;
+      top: 0px;
+      right: 0px;
+      opacity: 0.5;
+    }
+    .mais-pedidos h1 {
+      font-size: 56px;
+      margin-top: 100px;
+    }
+    
+    .itens-grid {
+      margin: 80px 5%;
+    }
+    
+    .item-1, .item-2 {
+      flex-direction: column;
+      height: auto;
+      padding: 20px;
+    }
+    
+    .item-text {
+      align-items: center;
+      text-align: center;
+    }
+    
+    .item-text p {
+      max-width: none;
+    }
+    
+    .item-footer {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+  .batata {
+      flex-direction: column;
+      height: auto;
+      gap: 20px;
+      padding: 20px;
+  }
+  .batata-text {
+      margin-top: -90px;
+      width: 100%;
+      order: 0;
+  }
+  
+  .batata-image-desktop {
+      display: none;
+  }
+  .batata-image-mobile {
+      display: block;
+      width: 100%;
+      height: 250px;
+      margin: 15px 0;
+      order: 3;
+  }
+  
+  .batata-image-area {
+      height: 100%;
+      background-position: center center;
+  }
+  
+  .batata-text h1 {
+    order: 0;
+      display: flex;
+      font-size: 16px;
+      margin-bottom: 5px;
+      text-align: center;
+      justify-content: center;
+  }
+  
+  .batata-text h2 {
+      display: flex;
+      font-size: 42px;
+      line-height: 1;
+      margin: 0 0 15px 0;
+      text-align: center;
+      justify-content: center;
+  }
+  
+  .batata-text p {
+      font-size: 18px;
+      line-height: 1.4;
+      margin: 15px 0 0 0;
+      order: 4;
+      opacity: 0.5;
+      text-align: center;
+  }
+  
+  .batata-button {
+      order: 5;
+      width: 100%;
+      max-width: 300px;
+      margin: 20px auto 0 auto;
+      font-size: 18px;
+      padding: 14px 24px;
+  }
+  .sobre-nos-banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 80px 20px;
+    gap: 30px;
+  }
+  .sobre-nos-banner-image {
+    min-width: unset;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .sobre-nos-banner-image-area {
+    width: 260px;
+    height: 260px;
+    border-radius: 20px;
+    background-position: center;
+    background-size: cover;
+    background-position: bottom;
+
+  }
+  .sobre-nos-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sobre-nos-title h1 {
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .sobre-nos-title h2 {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .sobre-nos-title h3 {
+    font-size: 26px;
+    line-height: 1.1;
+    margin-top: 5px;
+  }
+
+  .sobre-nos-title h5 {
+    font-size: 14px;
+    max-width: 320px;
+    margin-top: 20px;
+    opacity: 0.5;
+  }
+
+  .sobre-nos-banner-description {
+    font-size: 14px;
+    max-width: 280px;
+    margin-top: 20px;
+    opacity: 0.5;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
+    .moto {
+    background: url(images/Moto.png) no-repeat center;
+    
+    }
+
+    .moto::after {
+      background-size: 280px;
+      background-position: left center;
+      right: auto;
+      
+    }
+    .moto h1 {
+      font-size: 36px;
+      padding: 0 20px;
+    }
+    
+    .cardapio {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 40px 16px;
+    }
+  
+    .cardapio-item {
+      padding: 20px;
+      border-radius: 20px;
+    }
+  
+    .cardapio-item h1 {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+  
+    .description {
+      font-size: 14px;
+      max-width: 100%;
+    }
+  
+    .price {
+      font-size: 24px;
+      margin-top: 5px;
+    }
+  
+    .cardapio-item-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 12px;
+      padding: 30px 16px;
+    }
+  
+    footer h1 {
+      font-size: 14px;
+      opacity: 0.6;
+    }
+  
+  }
+  
+@media (max-width: 480px) {
+    .banner-title h1 {
+      font-size: 36px;
+    }
+    
+    .banner-title h2 {
+      font-size: 24px;
+    }
+    
+    .farol-effect::before {
+      left: -60px;
+      width: 150px;
+      height: 150px;
+    }
+    
+    .banner-time {
+      font-size: 24px;
+    }
+    
+    .mais-pedidos h1 {
+      font-size: 42px;
+    }
+    
+    .item-tags {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .batata-text h2 {
+      font-size: 32px;
+    }
+    
+    .sobre-nos-title h2,
+    .sobre-nos-title h3 {
+      font-size: 42px;
+    }
+    
+    .moto h1 {
+      font-size: 28px;
+    }
+    
+    .pneu-mais-pedidos::after {
+      right: 170px;
+      top: -300px;
+      opacity: 1;
+    }
+    
+    .pneu::after,
+    .moto::after {
+      opacity: 1;
+    }
+}
+@media (max-width:320px) { 
+  .home-banner { 
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .item-text { 
+    margin-top: -50px;
+  }
+  .batata { 
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+}
