@@ -453,6 +453,33 @@ nav {
     font-size: clamp(18px, 2vw, 18px);
     max-width: 500px;
 }
+
+.moto-cinematic {
+  position: relative;
+  height: 200vh; /* 200 já é suficiente */
+  background: #000;
+  overflow: hidden;
+}
+
+.moto-cinematic canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.moto-overlay-text {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
 .moto { 
     position: relative;
     overflow: hidden;

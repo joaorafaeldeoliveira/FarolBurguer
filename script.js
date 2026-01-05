@@ -1,5 +1,4 @@
 gsap.registerPlugin(ScrollTrigger);
-    
  gsap.from('.logo', {
    duration: 1,
    y: -50,
@@ -193,16 +192,26 @@ gsap.registerPlugin(ScrollTrigger);
     ease: 'power3.out'
   });
  
- gsap.from('.moto h1', {
-   scrollTrigger: {
-     trigger: '.moto',
-     start: 'top 85%',
-   },
-   duration: 1.5,
-   y: 100,
-   opacity: 0,
-   ease: 'power3.out'
- });
+//  gsap.from('.moto h1', {
+//    scrollTrigger: {
+//      trigger: '.moto',
+//      start: 'top 85%',
+//    },
+//    duration: 1.5,
+//    y: 100,
+//    opacity: 0,
+//    ease: 'power3.out'
+//  });
+gsap.from('.moto-overlay-text h1', {
+  scrollTrigger: {
+    trigger: '.moto-cinematic',
+    start: 'top 70%',
+  },
+  duration: 1.2,
+  y: 60,
+  opacity: 0,
+  ease: 'power3.out'
+});
  gsap.from('.cardapio-title', {
    scrollTrigger: {
      trigger: '.nossos-hamburgueres',
@@ -247,4 +256,62 @@ gsap.registerPlugin(ScrollTrigger);
    backgroundPosition: '0% 20%',
    ease: 'none'
  });
+
+ gsap.to(".moto-cinematic", {
+  backgroundColor: "#fff",
+  scrollTrigger: {
+    trigger: ".moto-cinematic",
+    start: "center center",
+    end: "bottom center",
+    scrub: true
+  }
+});
+
+ const canvas = document.getElementById("hero-scroll");
+
+if (canvas) {
+  const context = canvas.getContext("2d");
+
+  const frameCount = 140;
+  const images = [];
+  const imageState = { frame: 0 };
+
+  const currentFrame = index =>
+    `./frames/frame_${(index + 1).toString().padStart(4, '0')}.webp`;
+
+  // Pré-load
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = currentFrame(i);
+    images.push(img);
+  }
+
+  images[0].onload = () => {
+    canvas.width = images[0].naturalWidth;
+    canvas.height = images[0].naturalHeight;
+    render();
+  };
+
+  function render() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(images[imageState.frame], 0, 0);
+  }
+
+  gsap.to(imageState, {
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".moto-cinematic",
+      start: "top top",
+      end: "+=100%",
+      scrub: 1,
+      anticipatePin: 1,
+      fastScrollEnd: true
+    },
+    onUpdate: render
+  });
+
+  window.addEventListener("resize", render);
+}
  
