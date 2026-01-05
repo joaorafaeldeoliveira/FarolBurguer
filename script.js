@@ -205,7 +205,7 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.from('.moto-overlay-text h1', {
   scrollTrigger: {
     trigger: '.moto-cinematic',
-    start: 'top 70%',
+    start: 'top 80%',
   },
   duration: 1.2,
   y: 60,
@@ -257,8 +257,8 @@ gsap.from('.moto-overlay-text h1', {
    ease: 'none'
  });
 
- gsap.to(".moto-cinematic", {
-  backgroundColor: "#fff",
+gsap.to('.moto-overlay-text', {
+  opacity: 0,
   scrollTrigger: {
     trigger: ".moto-cinematic",
     start: "center center",
@@ -267,10 +267,22 @@ gsap.from('.moto-overlay-text h1', {
   }
 });
 
+// Adicione uma transição suave para a próxima seção
+gsap.from('.nossos-hamburgueres', {
+  backgroundColor: '#000',
+  scrollTrigger: {
+    trigger: '.nossos-hamburgueres',
+    start: 'top 90%',
+    end: 'top 50%',
+    scrub: 0.5
+  }
+});
+
  const canvas = document.getElementById("hero-scroll");
 
 if (canvas) {
   const context = canvas.getContext("2d");
+  const container = canvas.parentElement;
 
   const frameCount = 140;
   const images = [];
@@ -279,25 +291,71 @@ if (canvas) {
   const currentFrame = index =>
     `./frames/frame_${(index + 1).toString().padStart(4, '0')}.webp`;
 
-  // Pré-load
+  // Configuração inicial para 1280x720
+  canvas.width = 1280;
+  canvas.height = 720;
+
+  // Pré-load das imagens
   for (let i = 0; i < frameCount; i++) {
     const img = new Image();
     img.src = currentFrame(i);
     images.push(img);
   }
 
-  images[0].onload = () => {
-    canvas.width = images[0].naturalWidth;
-    canvas.height = images[0].naturalHeight;
-    render();
-  };
+  // Função para redimensionar o canvas mantendo aspect ratio 16:9
+  function resizeCanvas() {
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
+    
+    // Aspect ratio do vídeo (16:9)
+    const videoAspect = 16 / 9;
+    
+    // Calcula dimensões para preencher a tela mantendo o aspect ratio
+    let width = containerWidth;
+    let height = containerWidth / videoAspect;
+    
+    if (height < containerHeight) {
+      height = containerHeight;
+      width = containerHeight * videoAspect;
+    }
+    
+    // Centraliza o canvas
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    canvas.style.left = `${(containerWidth - width) / 2}px`;
+    canvas.style.top = `${(containerHeight - height) / 2}px`;
+  }
 
   function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(images[imageState.frame], 0, 0);
+    
+    if (images[imageState.frame] && images[imageState.frame].complete) {
+      // Desenha a imagem centralizada e escalada
+      const img = images[imageState.frame];
+      const scale = Math.max(
+        canvas.width / img.naturalWidth,
+        canvas.height / img.naturalHeight
+      );
+      
+      const x = (canvas.width - img.naturalWidth * scale) / 2;
+      const y = (canvas.height - img.naturalHeight * scale) / 2;
+      
+      context.drawImage(
+        img, 
+        x, y, 
+        img.naturalWidth * scale, 
+        img.naturalHeight * scale
+      );
+    }
   }
 
-  gsap.to(imageState, {
+  images[0].onload = () => {
+    resizeCanvas();
+    render();
+  };
+
+  // GSAP animation com ScrollTrigger
+  const scrollTween = gsap.to(imageState, {
     frame: frameCount - 1,
     snap: "frame",
     ease: "none",
@@ -306,12 +364,68 @@ if (canvas) {
       start: "top top",
       end: "+=100%",
       scrub: 1,
+      pin: true,
       anticipatePin: 1,
-      fastScrollEnd: true
-    },
-    onUpdate: render
+      onUpdate: () => {
+        render();
+        // Fade out do texto conforme o scroll
+        const progress = scrollTween.scrollTrigger.progress;
+        const textOpacity = 1 - (progress * 1.5);
+        document.querySelector('.moto-overlay-text').style.opacity = 
+          Math.max(0, textOpacity);
+      }
+    }
   });
 
-  window.addEventListener("resize", render);
+  // Event listeners para resize
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    render();
+    ScrollTrigger.refresh();
+  });
+
+  // Inicializa quando a página carrega
+  window.addEventListener("load", () => {
+    resizeCanvas();
+    render();
+    ScrollTrigger.refresh();
+  });
+
+  
 }
- 
+
+ gsap.to('.moto-overlay-text', {
+    opacity: 0,
+    scrollTrigger: {
+      trigger: ".moto-cinematic",
+      start: "center center",
+      end: "bottom center",
+      scrub: true
+    }
+  });
+  
+  // 3. Adicione uma transição de cor no próprio canvas
+  gsap.to(canvas, {
+    opacity: 0,
+    scrollTrigger: {
+      trigger: ".moto-cinematic",
+      start: "bottom 30%",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+
+
+// 4. Animação para a seção de cardápio aparecer suavemente
+gsap.from('.nossos-hamburgueres', {
+  opacity: 0,
+  y: 50,
+  duration: 1,
+  scrollTrigger: {
+    trigger: '.nossos-hamburgueres',
+    start: 'top 90%',
+    end: 'top 70%',
+    scrub: 1,
+    toggleActions: "play none none reverse"
+  }
+});
